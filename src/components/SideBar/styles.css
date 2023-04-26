@@ -1,0 +1,6 @@
+.side-bar {
+  width: 250px;
+  background-color: #12131A;
+  padding: 1rem;
+  height: calc(100vh);
+}
