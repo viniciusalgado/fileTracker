@@ -13,6 +13,9 @@ const TopBarGrid = styled(Grid)`
   justify-content: flex-end;
   background-color: #ffffff;
   padding: 1rem;
+  & .leftItem {
+    margin-right: auto;
+  }
 `
 
 export default TopBarGrid

@@ -1,16 +1,22 @@
 import React from 'react'
-import './styles.css'
+import { Grid } from '@mui/material'
+import FileExplorer from 'components/FileExplorer'
+import Breadcrumbs from 'components/BreadCrumbs'
 import TopBar from '../TopBar'
-import SideBar from '../SideBar'
+import { Container, MainGrid } from './styles'
 
 const MainPage = () => (
-  <div className="container">
+  <Container>
     <TopBar />
-    <SideBar />
-    <div className="main-layout">
-      <main className="main-content">Main Content</main>
-    </div>
-  </div>
+    <MainGrid container>
+      <Grid item md={12}>
+        <Breadcrumbs />
+      </Grid>
+      <Grid item md={12}>
+        <FileExplorer />
+      </Grid>
+    </MainGrid>
+  </Container>
 )
 
 export default MainPage

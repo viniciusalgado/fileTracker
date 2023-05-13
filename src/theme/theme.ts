@@ -10,7 +10,6 @@ const theme = createTheme({
       main: '#2560A7',
       contrastText: '#fff',
     },
-    // Add more colors as needed
   },
 })
 
