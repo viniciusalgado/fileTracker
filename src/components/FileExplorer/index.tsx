@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import fs from 'fs'
+import path from 'path'
 import { Grid } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import FolderIcon from '@mui/icons-material/Folder'
@@ -16,21 +18,38 @@ const columns = [
   { field: 'modified', headerName: 'Modified', width: 150 },
 ]
 
-const sampleData = [
-  { id: 1, type: 'folder', name: 'Documents', size: null, modified: '2023-05-07' },
-  { id: 2, type: 'folder', name: 'Images', size: null, modified: '2023-05-02' },
-  { id: 3, type: 'file', name: 'file1.txt', size: '1.2 MB', modified: '2023-05-05' },
-  // Add the rest of your data here...
-]
-
 const FileExplorer = () => {
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    fs.readdir('C:\\', (err, files) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+
+      const arrayOfFiles = files.map((file, index) => {
+        const stats = fs.statSync(path.join('C:\\', file))
+        const isDirectory = stats.isDirectory()
+        return {
+          id: index,
+          type: isDirectory ? 'folder' : 'file',
+          name: file,
+          size: isDirectory ? null : `${(stats.size / 1024 / 1024).toFixed(2)} MB`,
+          modified: stats.mtime.toISOString().slice(0,10)
+        }
+      })
+
+      setData(arrayOfFiles)
+    })
+  }, [])
+
   return (
     <Container container>
       <Grid item>
         <DataGrid
-          rows={sampleData}
+          rows={data}
           columns={columns}
-          pageSize={5}
           onRowDoubleClick={(params) => {
             console.log('Double clicked row:', params)
           }}
