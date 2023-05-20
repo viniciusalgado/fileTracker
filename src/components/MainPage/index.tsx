@@ -12,7 +12,7 @@ const MainPage = () => (
       <Grid item md={12}>
         <Breadcrumbs />
       </Grid>
-      <Grid item md={12}>
+      <Grid item md={12} sx={{width: '100%'}}>
         <FileExplorer />
       </Grid>
     </MainGrid>
